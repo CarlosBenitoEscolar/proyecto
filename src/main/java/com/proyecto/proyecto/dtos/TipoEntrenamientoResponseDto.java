@@ -9,7 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 
 public class TipoEntrenamientoResponseDto {
-    private final int tipoEntrenamientoID;
+    private final Long tipoEntrenamientoID;
     private final String nombre;
     private final String descripcion;
     private List<Rutinas> rutinas;

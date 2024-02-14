@@ -10,12 +10,13 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class EjerciciosResponseDto {
-    private final int ejercicioID;
+    private final Long ejercicioID;
     private final String nombre;
     private final String descripcion;
-    private final double peso;
-    private final int repeticiones;
+    private final Double peso;
+    private final Integer repeticiones;
     private Musculos musculos;
     private List<TipoEntrenamiento> tipoEntrenamiento;
     private List<Rutinas> rutinas;
+
 }

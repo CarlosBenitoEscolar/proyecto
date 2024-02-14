@@ -14,11 +14,11 @@ import java.util.List;
 public class Ejercicios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ejercicioID;
+    private Long ejercicioID;
     private String nombre;
     private String descripcion;
-    private double peso;
-    private int repeticiones;
+    private Double peso;
+    private Integer repeticiones;
     @ManyToOne
     private Musculos musculos;
     @OneToMany

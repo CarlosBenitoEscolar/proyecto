@@ -4,5 +4,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class MusculosRequestDto {
-    private final String name;
+    private final String nombre;
 }

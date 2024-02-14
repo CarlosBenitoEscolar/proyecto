@@ -8,5 +8,6 @@ import lombok.Data;
 public class RutinasRequestDto {
     private final String nombre;
     private final String descripcion;
-    private final Double completo;
+    private Boolean completo;
+    private final Long tipoEntrenamientoID;
 }

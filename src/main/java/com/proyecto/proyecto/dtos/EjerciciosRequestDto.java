@@ -7,6 +7,7 @@ import lombok.Data;
 public class EjerciciosRequestDto {
     private final String nombre;
     private final String descripcion;
-    private final double peso;
-    private final int repeticiones;
+    private final Double peso;
+    private final Integer repeticiones;
+    private final Long MusculosID;
 }

@@ -10,10 +10,10 @@ import java.util.List;
 @AllArgsConstructor
 
 public class RutinasResponseDto {
-    private final int rutinaID;
-    private final String nombre;
-    private final String descripcion;
-    private final Boolean completo;
+    private Long rutinaID;
+    private String nombre;
+    private String descripcion;
+    private Boolean completo;
     private TipoEntrenamiento tipoEntrenamiento;
     private List<Ejercicios> ejercicios;
 }

@@ -15,8 +15,8 @@ import java.util.List;
 public class Musculos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
+    private Long musculoID;
+    private String nombre;
     @OneToMany
     private List<Ejercicios> ejercicios;
 

@@ -14,7 +14,7 @@ import java.util.List;
 public class TipoEntrenamiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int tipoEntrenamientoID;
+    private Long tipoEntrenamientoID;
     private String nombre;
     private String descripcion;
     @OneToMany

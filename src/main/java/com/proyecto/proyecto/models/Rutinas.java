@@ -1,4 +1,5 @@
 package com.proyecto.proyecto.models;
+import io.micrometer.common.lang.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,9 +15,10 @@ import java.util.List;
 public class Rutinas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int rutinaID;
+    private Long rutinaID;
     private String nombre;
     private String descripcion;
+    @Nullable
     private Boolean completo;
     @ManyToOne
     private TipoEntrenamiento tipoEntrenamiento;

@@ -7,7 +7,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class MusculosResponseDto {
-    private final int id;
-    private final String name;
+    private final Long musculoID;
+    private final String nombre;
     private List<Ejercicios> ejercicios;
 }
