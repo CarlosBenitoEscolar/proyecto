@@ -1,10 +1,7 @@
 package com.proyecto.proyecto.controllers;
 
-
-import java.util.Map;
-import com.proyecto.proyecto.auth.LoginRequest;
 import com.proyecto.proyecto.auth.JwtService;
-import com.proyecto.proyecto.auth.SignupRequest;
+import com.proyecto.proyecto.auth.LoginRequest;
 import com.proyecto.proyecto.services.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +10,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -35,11 +34,11 @@ public class AuthController {
                 ))
         );
     }
-    @PostMapping("/signup")
-    public ResponseEntity<UserDetails> signup(@RequestBody SignupRequest signupRequest) {
-        return ResponseEntity.ok(
+//    @PostMapping("/signup")
+//    public ResponseEntity<UserDetails> signup(@RequestBody SignupRequest signupRequest) {
+//        return ResponseEntity.ok(
 //                jwtService.createToken(authentication.getName())
-                userDetailsService.create(signupRequest) //pasar por mapper
-        );
-    }
+//                userDetailsService.create(signupRequest) //pasar por mapper
+//        );
+//    }
 }

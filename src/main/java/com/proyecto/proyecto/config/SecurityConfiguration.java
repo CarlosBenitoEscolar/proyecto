@@ -36,7 +36,10 @@ public class SecurityConfiguration {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(mvc.pattern("/api/products")).permitAll()
+                        .requestMatchers(mvc.pattern("/api/musculos")).permitAll()
+                        .requestMatchers(mvc.pattern("/api/ejercicios")).permitAll()
+                        .requestMatchers(mvc.pattern("/api/rutinas")).permitAll()
+                        .requestMatchers(mvc.pattern("/api/tipoEntrenamiento")).permitAll()
                         .requestMatchers(mvc.pattern("/api/auth/login")).permitAll()
                         .requestMatchers(mvc.pattern("/api/auth/signup")).permitAll()
                         .anyRequest().authenticated()

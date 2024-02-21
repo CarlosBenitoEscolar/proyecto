@@ -40,7 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
             try {
                 Algorithm algorithm = Algorithm.HMAC256(jwtSecretKey);
                 JWTVerifier verifier = JWT.require(algorithm)
-                        .withIssuer("erosketa")
+                        .withIssuer("proyecto")
                         .build();
                 decodedJWT = verifier.verify(token);
 

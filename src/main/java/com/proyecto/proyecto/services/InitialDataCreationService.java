@@ -20,9 +20,9 @@ public class InitialDataCreationService {
     public void createFakeMusculos(int number) {
         if (number <= 0) return;
         for (int i = 0; i < number; i++) {
-            Musculos musculo = new Musculos();
-            musculo.setNombre("Musculo " + i);
-            musculosService.save(musculo);
+            Musculos musculos = new Musculos();
+            musculos.setNombre("Musculo " + i);
+            musculosService.save(musculos);
         }
     }
 
