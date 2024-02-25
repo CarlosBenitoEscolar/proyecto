@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface EjerciciosRepository extends JpaRepository<Ejercicios, Long> {
     List<Ejercicios> findEjerciciosByNombre(String Nombre);
+
+    List<Ejercicios> findByMusculosNombre(String nombreMusculo);
 }
 

@@ -46,5 +46,35 @@ public class EjerciciosServiceImpl implements EjerciciosService {
 
         return ejerciciosRepository.save(updated);
     }
+
+    @Override
+    public Ejercicios updatePeso(Long id, double peso) {
+        Ejercicios updated = this.findById(id);
+
+        updated.setPeso(peso);
+
+
+        return ejerciciosRepository.save(updated);
+    }
+
+    @Override
+    public Ejercicios updateRepeticiones(Long id, int repeticiones) {
+        Ejercicios updated = this.findById(id);
+
+        updated.setRepeticiones(repeticiones);
+
+
+        return ejerciciosRepository.save(updated);
+    }
+    @Override
+    public List<Ejercicios> findEjerciciosByNombreMusculo(String nombreMusculo) {
+        return ejerciciosRepository.findByMusculosNombre(nombreMusculo);
+    }
+
+
+
+
+
 }
+
 

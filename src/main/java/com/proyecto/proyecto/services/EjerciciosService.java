@@ -19,4 +19,11 @@ public interface EjerciciosService {
 
     Ejercicios update(Long id, Ejercicios model);
 
+    Ejercicios updatePeso(Long id, double peso);
+
+    Ejercicios updateRepeticiones(Long id, int repeticiones);
+
+    List<Ejercicios> findEjerciciosByNombreMusculo(String nombreMusculo);
+
+
 }

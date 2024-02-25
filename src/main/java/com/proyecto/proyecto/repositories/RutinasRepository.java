@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface RutinasRepository extends JpaRepository<Rutinas, Long> {
     List<Rutinas> findRutinasByNombre(String Nombre);
+
+    List<Rutinas> findByTipoEntrenamientoNombre(String tipo);
 }
 
 

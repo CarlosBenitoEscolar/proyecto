@@ -1,5 +1,7 @@
 package com.proyecto.proyecto.services;
 
+import com.proyecto.proyecto.dtos.RutinasResponseDto;
+import com.proyecto.proyecto.mappers.RutinasMapper;
 import com.proyecto.proyecto.models.Ejercicios;
 import com.proyecto.proyecto.models.Rutinas;
 import com.proyecto.proyecto.repositories.RutinasRepository;
@@ -15,6 +17,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RutinasServiceImpl implements RutinasService {
     private final RutinasRepository rutinasRepository;
+    private final EjerciciosRepository ejerciciosRepository;
+    private final RutinasMapper rutinasMapper;
+
 
     public List<Rutinas> findAll(){
         return rutinasRepository.findAll();
@@ -48,5 +53,24 @@ public class RutinasServiceImpl implements RutinasService {
 
 
         return rutinasRepository.save(updated);
+    }
+
+    @Override
+    public Rutinas eliminarEjercicio(Long idRutina, Long idEjercicio) {
+        Rutinas rutina = rutinasRepository.findById(idRutina)
+                .orElseThrow(() -> new IllegalArgumentException("Rutina no encontrada con ID: " + idRutina));
+
+        Ejercicios ejercicio = ejerciciosRepository.findById(idEjercicio)
+                .orElseThrow(() -> new IllegalArgumentException("Ejercicio no encontrado con ID: " + idEjercicio));
+
+        rutina.getEjercicios().remove(ejercicio);
+        rutinasRepository.save(rutina);
+        return rutina;
+    }
+
+    @Override
+    public List<RutinasResponseDto> findRutinasByTipoEntrenamiento(String tipo) {
+        List<Rutinas> rutinas = rutinasRepository.findByTipoEntrenamientoNombre(tipo);
+        return rutinasMapper.toResponse(rutinas);
     }
 }
