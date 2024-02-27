@@ -4,7 +4,6 @@ package com.proyecto.proyecto.config;
 import com.proyecto.proyecto.auth.JwtAuthenticationFilter;
 import com.proyecto.proyecto.repositories.UserDetailsRepository;
 import com.proyecto.proyecto.services.UserDetailsServiceImpl;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,27 +20,42 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@RequiredArgsConstructor
 public class SecurityConfiguration {
 
     private final UserDetailsRepository userDetailsRepository;
 
+    public SecurityConfiguration(UserDetailsRepository userDetailsRepository) {
+        this.userDetailsRepository = userDetailsRepository;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc) throws Exception {
+        RequestMatcher h2ConsoleMatcher = new AntPathRequestMatcher("/h2-console/**");
         http
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors()  // Aunque de deprecated, lo sigue cogiendo y permite la comunicacion cruzada entre distintos dominios,
+                // Cosa que normalmente esta prohibido ya que dos dominios no pueden comunicarse pero al tener /api/auth y /api/categories
+                // Queremos que se comuniquen.
+                .and()
+                .headers().frameOptions().disable() // Deshabilitar frameOptions para permitir la consola H2
+                .and()
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(mvc.pattern("/api/musculos")).permitAll()
-                        .requestMatchers(mvc.pattern("/api/ejercicios")).permitAll()
                         .requestMatchers(mvc.pattern("/api/rutinas")).permitAll()
-                        .requestMatchers(mvc.pattern("/api/tipoEntrenamiento")).permitAll()
-                        .requestMatchers(mvc.pattern("/api/auth/login")).permitAll()
+                        .requestMatchers(mvc.pattern("/api/tipo-entrenamiento")).permitAll() // Añadido para comprobar si se creaban los datos sin usar postman
+                        .requestMatchers(mvc.pattern("/api/ejercicios")).permitAll()
+                        .requestMatchers(mvc.pattern("/api/musculos")).permitAll()
                         .requestMatchers(mvc.pattern("/api/auth/signup")).permitAll()
+                        .requestMatchers(mvc.pattern("/api/auth/login")).permitAll()
+                        .requestMatchers(h2ConsoleMatcher).permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
