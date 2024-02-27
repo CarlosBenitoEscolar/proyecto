@@ -38,16 +38,6 @@ public class TipoEntrenamientoController {
         );
     }
 
-    @GetMapping("/{nombre}")
-    public ResponseEntity<TipoEntrenamientoResponseDto> getTipoEntrenamientoByNombre(
-            @PathVariable String nombre
-    ) {
-        log.info("getTipoEntrenamientoByNombre");
-        return ResponseEntity.ok(
-                (TipoEntrenamientoResponseDto) tipoEntrenamientoMapper.toResponse(tipoEntrenamientoService.findTipoEntrenamientoByNombre(nombre))
-        );
-    }
-
     @PostMapping
     public ResponseEntity<TipoEntrenamientoResponseDto> postTipoEntrenamiento(
             @RequestBody TipoEntrenamientoRequestDto tipoEntrenamientoRequestDto

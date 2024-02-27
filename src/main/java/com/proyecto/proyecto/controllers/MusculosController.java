@@ -38,16 +38,6 @@ public class MusculosController {
         );
     }
 
-    @GetMapping("/{nombre}")
-    public ResponseEntity<MusculosResponseDto> getMusculoById(
-            @PathVariable String nombre
-    ) {
-        log.info("getMusculoByNombre");
-        return ResponseEntity.ok(
-                (MusculosResponseDto) musculosMapper.toResponse(musculosService.findMusculosByNombre(nombre))
-        );
-    }
-
     @PostMapping
     public ResponseEntity<MusculosResponseDto> postMusculo(
             @RequestBody MusculosRequestDto musculosRequestDto

@@ -37,23 +37,6 @@ public class RutinasController {
         );
     }
 
-    @GetMapping("/{nombre}")
-    public ResponseEntity<RutinasResponseDto> getRutinaById(
-            @PathVariable String nombre
-    ) {
-        log.info("getRutinaByNombre");
-        return ResponseEntity.ok(
-                (RutinasResponseDto) rutinasMapper.toResponse(rutinasService.findRutinasByNombre(nombre))
-        );
-    }
-
-    @GetMapping("/tipo-entrenamiento/{tipo}")
-    public ResponseEntity<List<RutinasResponseDto>> getRutinasByTipoEntrenamiento(@PathVariable String tipo) {
-        List<RutinasResponseDto> rutinas = rutinasService.findRutinasByTipoEntrenamiento(tipo);
-        return ResponseEntity.ok(rutinas);
-    }
-
-
     @PostMapping
     public ResponseEntity<RutinasResponseDto> postRutina(
             @RequestBody RutinasRequestDto rutinasRequestDto
@@ -88,13 +71,4 @@ public class RutinasController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{idRutina}/ejercicios/{idEjercicio}")
-    public ResponseEntity<RutinasResponseDto> eliminarEjercicio(
-            @PathVariable Long idRutina,
-            @PathVariable Long idEjercicio
-    ) {
-        log.info("eliminarEjercicio");
-        Rutinas rutina = rutinasService.eliminarEjercicio(idRutina, idEjercicio);
-        return ResponseEntity.ok(rutinasMapper.toResponse(rutina));
-    }
 }

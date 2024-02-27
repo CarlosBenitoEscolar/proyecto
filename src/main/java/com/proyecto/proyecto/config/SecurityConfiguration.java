@@ -51,13 +51,9 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(mvc.pattern("/api/ejercicios")).permitAll()
-                        .requestMatchers(mvc.pattern("/api/ejercicios/**")).permitAll()
                         .requestMatchers(mvc.pattern("/api/musculos")).permitAll()
-                        .requestMatchers(mvc.pattern("/api/musculos/**")).permitAll()
                         .requestMatchers(mvc.pattern("/api/tipo-entrenamiento")).permitAll()
-                        .requestMatchers(mvc.pattern("/api/tipo-entrenamiento/**")).permitAll()
                         .requestMatchers(mvc.pattern("/api/rutinas")).permitAll()
-                        .requestMatchers(mvc.pattern("/api/rutinas/**")).permitAll()
                         .requestMatchers(mvc.pattern("/api/auth/login")).permitAll()
                         .requestMatchers(mvc.pattern("/api/auth/signup")).permitAll()
                         .requestMatchers(h2ConsoleMatcher).permitAll()

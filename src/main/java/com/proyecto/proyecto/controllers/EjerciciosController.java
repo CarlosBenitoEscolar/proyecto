@@ -37,24 +37,6 @@ public class EjerciciosController {
         );
     }
 
-    @GetMapping("/{nombre}")
-    public ResponseEntity<EjerciciosResponseDto> getEjercicioByNombre(
-            @PathVariable String nombre
-    ) {
-        log.info("getEjercicioByNombre");
-        return ResponseEntity.ok(
-                (EjerciciosResponseDto) ejercicioMapper.toResponse(ejercicioService.findEjerciciosByNombre(nombre))
-        );
-    }
-    @GetMapping("/{nombreMusculo}/buscar-por-musculo/")
-    public ResponseEntity<List<EjerciciosResponseDto>> buscarEjerciciosPorMusculo(
-            @RequestParam String nombreMusculo
-    ) {
-        log.info("buscarEjerciciosPorMusculo");
-        List<Ejercicios> ejercicios = ejercicioService.findEjerciciosByNombreMusculo(nombreMusculo);
-        return ResponseEntity.ok(ejercicioMapper.toResponse(ejercicios));
-    }
-
     @PostMapping
     public ResponseEntity<EjerciciosResponseDto> postEjercicio(
             @RequestBody EjerciciosRequestDto ejercicioRequestDto
@@ -73,28 +55,6 @@ public class EjerciciosController {
     ) {
         log.info("putEjercicio");
         Ejercicios ejercicioUpdated = ejercicioService.update(id, ejercicioMapper.toModel(ejercicioRequestDto));
-        return ResponseEntity.ok(
-                ejercicioMapper.toResponse(ejercicioUpdated)
-        );
-    }
-    public ResponseEntity<EjerciciosResponseDto> updatePeso(
-            @PathVariable Long id,
-            @RequestParam double peso
-    ) {
-        log.info("updatePeso");
-        Ejercicios ejercicioUpdated = ejercicioService.updatePeso(id, peso);
-        return ResponseEntity.ok(
-                ejercicioMapper.toResponse(ejercicioUpdated)
-        );
-    }
-
-    @PutMapping("/{id}/repeticiones")
-    public ResponseEntity<EjerciciosResponseDto> updateRepeticiones(
-            @PathVariable Long id,
-            @RequestParam int repeticiones
-    ) {
-        log.info("updateRepeticiones");
-        Ejercicios ejercicioUpdated = ejercicioService.updateRepeticiones(id, repeticiones);
         return ResponseEntity.ok(
                 ejercicioMapper.toResponse(ejercicioUpdated)
         );
