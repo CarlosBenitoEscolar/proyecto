@@ -4,6 +4,7 @@ package com.proyecto.proyecto.config;
 import com.proyecto.proyecto.auth.JwtAuthenticationFilter;
 import com.proyecto.proyecto.repositories.UserDetailsRepository;
 import com.proyecto.proyecto.services.UserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,10 +22,10 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.RequestMatcher;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
+import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @Configuration
 @EnableWebSecurity
@@ -49,12 +50,16 @@ public class SecurityConfiguration {
                 .headers().frameOptions().disable() // Deshabilitar frameOptions para permitir la consola H2
                 .and()
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(mvc.pattern("/api/rutinas")).permitAll()
-                        .requestMatchers(mvc.pattern("/api/tipo-entrenamiento")).permitAll() // Añadido para comprobar si se creaban los datos sin usar postman
                         .requestMatchers(mvc.pattern("/api/ejercicios")).permitAll()
+                        .requestMatchers(mvc.pattern("/api/ejercicios/**")).permitAll()
                         .requestMatchers(mvc.pattern("/api/musculos")).permitAll()
-                        .requestMatchers(mvc.pattern("/api/auth/signup")).permitAll()
+                        .requestMatchers(mvc.pattern("/api/musculos/**")).permitAll()
+                        .requestMatchers(mvc.pattern("/api/tipo-entrenamiento")).permitAll()
+                        .requestMatchers(mvc.pattern("/api/tipo-entrenamiento/**")).permitAll()
+                        .requestMatchers(mvc.pattern("/api/rutinas")).permitAll()
+                        .requestMatchers(mvc.pattern("/api/rutinas/**")).permitAll()
                         .requestMatchers(mvc.pattern("/api/auth/login")).permitAll()
+                        .requestMatchers(mvc.pattern("/api/auth/signup")).permitAll()
                         .requestMatchers(h2ConsoleMatcher).permitAll()
                         .anyRequest().authenticated()
                 )
