@@ -21,7 +21,7 @@ public class InitialDataCreationService {
     private final Faker faker = new Faker(new Locale("en-US"));
 
     public void createDefaultAdminUser() {
-        User user = new User("admin", "$2a$12$K4tojeaYWMK55KzWzDWtLOuuUjRTkycWhSGHYWA2LXMZqmZUtuXPO"); // Esto es "password" codificado con bcrypt
+        User user = new User("user", "$2a$12$K4tojeaYWMK55KzWzDWtLOuuUjRTkycWhSGHYWA2LXMZqmZUtuXPO"); // Esto es "password" codificado con bcrypt)
         userDetailsService.save(user);
     }
 
