@@ -21,7 +21,7 @@ public class InitialDataCreationService {
     private final Faker faker = new Faker(new Locale("en-US"));
 
     public void createDefaultAdminUser() {
-        User user = new User("user", "$2a$12$K4tojeaYWMK55KzWzDWtLOuuUjRTkycWhSGHYWA2LXMZqmZUtuXPO"); // Esto es "password" codificado con bcrypt)
+        User user = new User("user", "$2a$12$K4tojeaYWMK55KzWzDWtLOuuUjRTkycWhSGHYWA2LXMZqmZUtuXPO");
         userDetailsService.save(user);
     }
 
@@ -29,7 +29,7 @@ public class InitialDataCreationService {
         if (number <= 0) return;
         for (int i = 0; i < number; i++) {
             Musculos musculos = new Musculos();
-            musculos.setNombre(faker.animal().name()); // Usando nombres de animales como un ejemplo creativo
+            musculos.setNombre(faker.animal().name());
             musculosService.save(musculos);
         }
     }
@@ -38,7 +38,7 @@ public class InitialDataCreationService {
         if (number <= 0) return;
         for (int i = 0; i < number; i++) {
             TipoEntrenamiento tipoEntrenamiento = new TipoEntrenamiento();
-            tipoEntrenamiento.setNombre(faker.name().name()); // Usando deportes como nombres
+            tipoEntrenamiento.setNombre(faker.name().name());
             tipoEntrenamiento.setDescripcion(faker.lorem().sentence());
             tipoEntrenamientoService.save(tipoEntrenamiento);
         }
@@ -56,7 +56,6 @@ public class InitialDataCreationService {
             if (!musculoList.isEmpty()) {
                 ejercicio.setMusculos(musculoList.get(faker.number().numberBetween(0, musculoList.size())));
             }
-            // Omitimos la configuración de tipoEntrenamiento y rutinas aquí
             ejerciciosService.save(ejercicio);
         }
     }
@@ -66,13 +65,12 @@ public class InitialDataCreationService {
         List<TipoEntrenamiento> tipoEntrenamientoList = tipoEntrenamientoService.findAll();
         for (int i = 0; i < number; i++) {
             Rutinas rutina = new Rutinas();
-            rutina.setNombre(faker.music().genre()); // Usando géneros musicales como nombres
+            rutina.setNombre(faker.music().genre());
             rutina.setDescripcion(faker.lorem().sentence());
             rutina.setCompleto(faker.bool().bool());
             if (!tipoEntrenamientoList.isEmpty()) {
                 rutina.setTipoEntrenamiento(tipoEntrenamientoList.get(faker.number().numberBetween(0, tipoEntrenamientoList.size())));
             }
-            // La asociación de ejercicios puede manejarse en otro punto, o mediante lógica específica de adición.
             rutinasService.save(rutina);
         }
     }
